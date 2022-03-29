@@ -1,0 +1,14 @@
+<p class="mb-5">
+  Search results for:
+  <strong>
+    <%= params[:keywords] %>
+  </strong>
+</p>
+
+<ul>
+  <% @products.each do | product | %>
+    <li>
+      <%= link_to product.name, product %>
+    </li>
+  <% end %>
+</ul>
