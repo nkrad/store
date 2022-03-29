@@ -1,2 +1,14 @@
-<h1>Home#home</h1>
-<p>Find me in app/views/home/home.html.erb</p>
+<div class="container">
+  <h1>Home#home</h1>
+  <p>Find me in app/views/home/home.html.erb</p>
+
+  <div class="row row-cols-4">
+    <% @products.each do |product| %>
+      <%= render product %>
+
+
+
+    <% end %>
+    </div>
+
+</div>

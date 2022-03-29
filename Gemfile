@@ -79,3 +79,6 @@ gem 'devise'
 
 #carrierwave
 gem 'carrierwave', '~> 2.0'
+
+#scss
+gem 'sass-rails'
