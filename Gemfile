@@ -70,3 +70,12 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# ActiveAdmin
+gem 'activeadmin'
+
+# devise
+gem 'devise'
+
+#carrierwave
+gem 'carrierwave', '~> 2.0'
