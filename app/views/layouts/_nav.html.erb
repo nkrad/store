@@ -15,7 +15,7 @@
   <div style="width:50%">
   <%= form_with(url:search_products_path, method: :get, local: true) do  %>
           <%= text_field_tag(:keywords, nil, class: "input", placeholder: "Search for a product") %>
-          <%= submit_tag("Search", class: "button is-primary") %>
+          <%= submit_tag("Search", class: "button") %>
   <% end %>
 
 
