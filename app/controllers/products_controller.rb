@@ -2,7 +2,8 @@ class ProductsController < InheritedResources::Base
   private
 
   def product_params
-    params.require(:product).permit(:name, :designer, :size, :description, :price, :category_id)
+    params.require(:product).permit(:name, :designer, :size, :description, :price, :category_id,
+                                    :image)
   end
 
   def search
