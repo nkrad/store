@@ -1,12 +1,18 @@
 <div id="<%= dom_id product %>">
 
 
-
-<p>*image goes here*</p>
-  <p>
-    <strong>Name:</strong>
+<h3>
     <%= product.name %>
+  </h3>
+
+<%= image_tag product.image, :size => '180x180' %>
+
+  <p>
+      <%= link_to "Show this product", product %>
   </p>
+
+
+
 
   <p>
     <strong>Designer:</strong>
@@ -32,10 +38,5 @@
     <strong>Price:</strong>
     $<%= product.price %>
   </p>
-
-  <p>
-      <%= link_to "Show this product", product %>
-    </p>
-
 <p>*add add to cart button*</p>
 </div>
