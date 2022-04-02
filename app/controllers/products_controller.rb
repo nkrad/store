@@ -1,4 +1,12 @@
 class ProductsController < InheritedResources::Base
+  def add_to_cart
+    session[:cart] << params[:id]
+
+    # redirect_back(fallback_location: root_path)
+
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def product_params

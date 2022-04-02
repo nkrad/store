@@ -1,14 +1,28 @@
 <div class="container">
+  <details>
+<summary>
+Cart
+<% if cart.present? %>
+| <sup><%= cart.size %></sup>
+<% end %>
+</summary>
+<% if cart.present? %>
+<ul>
+<% cart.each do |product| %>
+<li>
+<%= product.name %> <%= link_to '❌', cart_path(product), method: :delete %>
+</li>
+<% end %>
+</ul>
+<% else %>
+<p>No items in your cart.</p>
+<% end %>
+</details>
   <h1>New Products</h1>
   <p>Sorted newest to oldest</p>
-
   <div class="row row-cols-4">
     <% @products.each do |product| %>
       <%= render product %>
-
-
-
     <% end %>
     </div>
-
 </div>

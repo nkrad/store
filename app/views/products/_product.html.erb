@@ -1,5 +1,4 @@
-<div id="<%= dom_id product %>">
-
+<div class="product">
 
 <h3>
     <%= product.name %>
@@ -10,9 +9,6 @@
   <p>
       <%= link_to "Show this product", product %>
   </p>
-
-
-
 
   <p>
     <strong>Designer:</strong>
@@ -38,5 +34,15 @@
     <strong>Price:</strong>
     $<%= product.price %>
   </p>
-<p>*add add to cart button*</p>
+
+  <% if cart.include?(product)%>
+  <%= button_to cart_path(product), method: :delete do%>
+    Remove from cart
+  <% end %>
+  <% else%>
+  <%= form_with url: cart_index_path, method: :post do %>
+    <%= hidden_field_tag :id, product.id %>
+    <%= button_tag 'Add to Cart' %>
+    <% end%>
+  <% end %>
 </div>
