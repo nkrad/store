@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>All <%= category.category %></h1>
+  <div class="row row-cols-4">
+    <% @products.each do |product| %>
+      <%= render product %>
+    <% end %>
+    </div>
+</div>

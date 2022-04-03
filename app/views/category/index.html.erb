@@ -1,0 +1,10 @@
+<div class="container">
+  <h1>All Categories</h1>
+  <div class="row row-cols-4">
+    <% @category.each do |category| %>
+    <ul>
+      <%= link_to category.category, category %>
+    </ul>
+    <% end %>
+    </div>
+</div>

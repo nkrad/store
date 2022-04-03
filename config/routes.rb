@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "category/index"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :products
@@ -7,7 +8,9 @@ Rails.application.routes.draw do
   get "home/home"
   root to: "home#home"
 
-  resources :cart, only: [:create, :destroy]
+  resources :cart, only: %i[create destroy]
+
+  resources :category, only: %i[index show]
 
   # taken from intro project, doesnt work
   resources :products, only: %i[home show] do

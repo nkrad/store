@@ -7,8 +7,7 @@
    <%= image_tag "rarityLogoSmall.png", height: 30%>
   <% end %>
 
-
-  <a href="#PLACEHOLDER">Categories</a>
+  <%= link_to "Categories", category_index_path %>
   <a href="#PLACEHOLDER">Designers</a>
   <a href="#PLACEHOLDER">Cart</a>
 
@@ -17,6 +16,4 @@
           <%= text_field_tag(:keywords, nil, class: "input", placeholder: "Search for a product") %>
           <%= submit_tag("Search", class: "button") %>
   <% end %>
-
-
 </div>
