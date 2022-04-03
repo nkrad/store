@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def home
-    @products = Product.all.order("designer DESC").limit(25)
+    @products = Product.page params[:page]
   end
 end
