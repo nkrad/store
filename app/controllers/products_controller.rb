@@ -1,4 +1,6 @@
 class ProductsController < InheritedResources::Base
+  helper_method :cart
+
   def add_to_cart
     session[:cart] << params[:id]
 

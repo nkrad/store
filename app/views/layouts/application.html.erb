@@ -18,6 +18,26 @@
   <%= render 'layouts/nav'%>
   <p><%= notice %></p>
   <p><%= alert %></p>
-  <%= yield %>
+  <details>
+  <summary>
+    Cart
+    <% if cart.present? %>
+    | <sup><%= cart.size %></sup>
+    <% end %>
+  </summary>
+  <% if cart.present? %>
+    <ul>
+      <% cart.each do |product| %>
+        <li>
+          <%= product.name %>
+          <%= button_to 'Remove from cart', cart_path(product), method: :delete %>
+        </li>
+  <% end %>
+    </ul>
+<% else %>
+  <p>No items in your cart.</p>
+  <% end %>
+      </details>
+    <%= yield %>
   </body>
 </html>
