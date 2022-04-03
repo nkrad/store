@@ -1,14 +1,15 @@
 <p class="mb-5">
   Search results for:
   <strong>
-    <%= params[:keywords] %>
+    '<%= params[:keywords] %>'
   </strong>
 </p>
 
 <ul>
+<%if @products.count == 0%>
+    No results found
+<%end%>
   <% @products.each do | product | %>
-    <li>
-      <%= link_to product.name, product %>
-    </li>
+      <%= render product %>
   <% end %>
 </ul>
