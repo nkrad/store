@@ -9,7 +9,9 @@
 <%if @products.count == 0%>
     No results found
 <%end%>
-  <% @products.each do | product | %>
+  <div class="row row-cols-2">
+    <% @products.each do |product| %>
       <%= render product %>
-  <% end %>
+    <% end %>
+  </div>
 </ul>

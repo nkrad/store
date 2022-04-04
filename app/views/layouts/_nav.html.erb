@@ -12,7 +12,12 @@
 
   <div style="width:50%">
   <%= form_with(url:search_path, method: :get, local: true) do  %>
+          <% categories_array = Category.all.map { |category| [category.category, category.id] } %>
+          <% categories_array.unshift ("All") %>
           <%= text_field_tag(:keywords, nil, class: "input", placeholder: "Search for a product") %>
+          <%= select_tag :category, options_for_select(categories_array) %>
+
+
           <%= submit_tag("Search", class: "button") %>
   <% end %>
 </div>

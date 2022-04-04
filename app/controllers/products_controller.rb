@@ -11,8 +11,16 @@ class ProductsController < InheritedResources::Base
 
   def search
     wildcard_search = "%#{params[:keywords]}%"
-    # gets the products with title that match the search
-    @products = Product.where("name OR description LIKE ?", wildcard_search)
+    category_search = params[:category]
+
+    # @products = Product.where("name OR description LIKE ?", wildcard_search)
+    @products = if category_search == "All"
+                  Product.where("name OR description LIKE ?", wildcard_search)
+
+                else
+                  Product.where("name OR description LIKE ? AND category_id LIKE ?",
+                                wildcard_search, category_search)
+                end
   end
 
   private
