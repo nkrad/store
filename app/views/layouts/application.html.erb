@@ -31,7 +31,7 @@
       <% cart.each do |product| %>
         <li>
           <%= product.name %>
-          <%= button_to 'Remove from cart', cart_path(product), method: :delete %>
+          <%= button_to 'Remove from cart', cart_path(product), method: :delete, class: 'btn btn-link' %>
         </li>
   <% end %>
     </ul>
