@@ -21,8 +21,8 @@ class CartController < ApplicationController
   def destroy
     id = params[:id].to_i
 
+    session[:quantity].delete_at(session[:cart].index(id))
     session[:cart].delete(id)
-    session[:quantity].delete(id)
 
     product = Product.find(id)
     flash[:notice] = "❌#{product.name} was removed from your cart."

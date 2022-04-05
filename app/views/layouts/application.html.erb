@@ -34,6 +34,7 @@
         <%= image_tag product.image, :size => '30x30' %>
           <%= link_to product.name, product %> |
           $<%= product.price %> |
+          <%= session[:quantity].index(2)%>
 
 
 
