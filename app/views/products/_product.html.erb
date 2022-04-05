@@ -1,12 +1,12 @@
-<div class="product">
+<div class="card">
 
-<h3>
-    <%= product.name %>
-  </h3>
+<div class="card-body">
 
 <%= image_tag product.image, :size => '180x180' %>
 
-
+  <h3>
+    <%= product.name %>
+  </h3>
 
   <p>
       <%= link_to "Show this product", product %>
@@ -27,7 +27,7 @@
     <%= product.size %>
   </p>
 
-  <p>
+  <p class="card-text">
     <strong>Description:</strong>
     <%= product.description %>
   </p>
@@ -38,13 +38,14 @@
   </p>
 
   <% if cart.include?(product)%>
-  <%= button_to cart_path(product), method: :delete do%>
+  <%= button_to cart_path(product), method: :delete, class: 'btn btn-danger' do%>
     Remove from cart
   <% end %>
   <% else%>
   <%= form_with url: cart_index_path, method: :post do %>
     <%= hidden_field_tag :id, product.id %>
-    <%= button_tag 'Add to Cart' %>
+    <%= button_tag 'Add to Cart', class: 'btn btn-primary' %>
     <% end%>
   <% end %>
+  </div>
 </div>

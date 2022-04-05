@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get "search", to: "products#search"
   root to: "home#home"
 
-  resources :cart, only: %i[create destroy]
+  resources :cart
+
+  get "cart/show"
 
   resources :category, only: %i[index show]
 end
