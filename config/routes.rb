@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :cart
 
   get "cart/show"
+  post "cart/update"
 
   resources :category, only: %i[index show]
 end
