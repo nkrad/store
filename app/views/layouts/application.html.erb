@@ -15,7 +15,6 @@
   <%= render 'layouts/nav'%>
   <p><%= notice %></p>
   <p><%= alert %></p>
-  quantity:<%= session[:quantity]%>
   <details>
   <summary>
     Cart
@@ -27,25 +26,15 @@
     <ul>
       <% cart.each do |product| %>
         <li>
-
-
-
-
           <%= form_with url: cart_update_path, method: :post do %>
             <%= hidden_field_tag :id, product.id %>
           <%= image_tag product.image, :size => '30x30' %>
           <%= link_to product.name, product %> |
           $<%= product.price.to_f %> |
-          Qty:<%= select_tag :quantity, options_for_select(1..10, session[:quantity][session[:cart].index(product.id)]), onchange: "this.form.submit();"%>
-
+          Qty: <%= select_tag :quantity, options_for_select(1..10, session[:quantity][session[:cart].index(product.id)]), onchange: "this.form.submit();"%>
           <% end%>
-
-
-
-
-
           <%= button_to cart_path(product), method: :delete, class: 'btn btn-link',form: {style: 'display:inline-block;'} do%>
-    Remove from cart
+          Remove from cart
   <% end %>
         </li>
   <% end %>
