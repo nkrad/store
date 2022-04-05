@@ -19,6 +19,7 @@
   <%= render 'layouts/nav'%>
   <p><%= notice %></p>
   <p><%= alert %></p>
+  quantity:<%= session[:quantity]%>
   <details>
   <summary>
     Cart
@@ -32,11 +33,14 @@
         <li>
         <%= image_tag product.image, :size => '30x30' %>
           <%= link_to product.name, product %> |
-          $<%= product.price %>
+          $<%= product.price %> |
 
 
 
-          <%= link_to 'Remove from cart', cart_path(product), method: :delete, class: 'btn btn-link' %>
+
+          <%= button_to cart_path(product), method: :delete, class: 'btn btn-link',form: {style: 'display:inline-block;'} do%>
+    Remove from cart
+  <% end %>
         </li>
   <% end %>
   <%= form_with url: cart_path(cart), method: :post do %>

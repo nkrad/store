@@ -1,14 +1,6 @@
 class ProductsController < InheritedResources::Base
   helper_method :cart
 
-  def add_to_cart
-    session[:cart] << params[:id]
-
-    # redirect_back(fallback_location: root_path)
-
-    redirect_back(fallback_location: root_path)
-  end
-
   def search
     wildcard_search = "%#{params[:keywords]}%"
     category_search = params[:category]
