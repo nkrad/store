@@ -11,8 +11,6 @@
           <% categories_array.unshift ("All") %>
           <%= text_field_tag(:keywords, nil, class: "input", placeholder: "Search for a product") %>
           <%= select_tag :category, options_for_select(categories_array) %>
-
-
           <%= submit_tag("Search", class: "button") %>
   <% end %>
 </div>

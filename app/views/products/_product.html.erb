@@ -1,42 +1,32 @@
 <div class="card">
-
 <div class="card-body">
-
 <%= image_tag product.image, :size => '180x180' %>
-
   <h3>
     <%= product.name %>
   </h3>
-
   <p>
       <%= link_to "Show this product", product %>
   </p>
-
   <p>
     <strong>Designer:</strong>
     <%= product.designer %>
   </p>
-
   <p>
     <strong>Category:</strong>
     <%= product.category.category %>
   </p>
-
   <p>
     <strong>Size:</strong>
     <%= product.size %>
   </p>
-
   <p class="card-text">
     <strong>Description:</strong>
     <%= product.description %>
   </p>
-
   <p>
     <strong>Price:</strong>
     $<%= product.price %>
   </p>
-
   <% if cart.include?(product)%>
   <%= button_to cart_path(product), method: :delete, class: 'btn btn-danger' do%>
     Remove from cart

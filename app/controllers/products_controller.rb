@@ -1,5 +1,5 @@
 class ProductsController < InheritedResources::Base
-  helper_method :cart
+  # helper_method :cart
 
   def search
     wildcard_search = "%#{params[:keywords]}%"
