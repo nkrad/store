@@ -42,7 +42,9 @@ class CartController < ApplicationController
     session[:quantity][session[:cart].index(id)] = quantity
 
     flash[:notice] = "➕#{product.name}'s quantity was updated."
-    redirect_to root_path
+
+    # uncomment to redirect to cart page
+    # redirect_to root_path
   end
 
   def show
