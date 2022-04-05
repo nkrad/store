@@ -17,4 +17,9 @@ class CartController < ApplicationController
     flash[:notice] = "❌#{product.name} was removed from your cart."
     redirect_to root_path
   end
+
+  def show
+    @cart = session[:cart]
+    @products = Product.find(@cart)
+  end
 end
