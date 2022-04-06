@@ -15,7 +15,7 @@ class CartController < ApplicationController
 
       product = Product.find(id)
       flash[:notice] = "✔️#{product.name} was added to your cart."
-      redirect_to root_path
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -28,7 +28,7 @@ class CartController < ApplicationController
 
     product = Product.find(id)
     flash[:notice] = "❌#{product.name} was removed from your cart."
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
 
   # updating cart quantity
