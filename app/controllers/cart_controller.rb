@@ -41,6 +41,7 @@ class CartController < ApplicationController
     # changes the quantity AT the index of the product id
     session[:quantity][session[:cart].index(id)] = quantity
 
+    # notice does not appear due to page not redirecting
     flash[:notice] = "➕#{product.name}'s quantity was updated."
 
     # uncomment to redirect to cart page
