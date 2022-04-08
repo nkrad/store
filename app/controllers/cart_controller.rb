@@ -46,6 +46,7 @@ class CartController < ApplicationController
 
     # uncomment to redirect to cart page
     # redirect_to root_path
+    # testing if github still auth
   end
 
   def show
