@@ -7,7 +7,7 @@
   | Logged in as <%= current_user.email %> |
     <%= link_to "Log out", destroy_user_session_path, :method=>'delete'%>
   <% else %>
-    <%= link_to "login", new_user_session_path %>
+  |  <%= link_to "Login", new_user_session_path %>
   <% end %>
 
   <div style="width:50%">
