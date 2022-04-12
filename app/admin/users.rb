@@ -5,6 +5,8 @@ ActiveAdmin.register User do
   # Uncomment all parameters which should be permitted for assignment
   #
   # permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at
+
+  permit_params :email
   #
   # or
   #
@@ -19,13 +21,7 @@ ActiveAdmin.register User do
     f.semantic_errors # shows errors on :base
     # f.inputs          # builds an input field for every attribute
     f.inputs do
-      f.input :category, as: :select, collection: Category.all.map { |c| [c.category, c.id] }
-      f.input :image, as: :file
-      f.input :name
-      f.input :designer
-      f.input :size
-      f.input :description
-      f.input :price
+      f.input :email
     end
     f.actions         # adds the 'Submit' and 'Cancel' buttons
   end
