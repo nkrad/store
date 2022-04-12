@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'profile/edit'
   devise_for :users
   get "category/index"
   devise_for :admin_users, ActiveAdmin::Devise.config
