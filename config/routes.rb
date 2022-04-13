@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
-  get 'profile/edit'
+  get "profile/edit"
   devise_for :users
   get "category/index"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :products
+
+  get "new_address" => "profile#new"
+
+  get "remove_address" => "profile#remove"
 
   # sets the root path to the home controller
   get "home/home"

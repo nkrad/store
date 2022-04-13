@@ -1,2 +1,37 @@
-<h1>Profile | <%= current_user.email  %></h1>
-<h3>Addresses:</h3>
+
+<h1>Account | <%= current_user.email  %></h1>
+
+<h3>Saved Addresses:</h3>
+
+<div class="row">
+<% @addresses.each do |address| %>
+<div class="card">
+      <%= address.fname %>
+      <%= address.lname %><br/>
+      <%= address.street %><br/>
+      <%= address.city %>,
+      <%= address.province.province %><br/>
+      <%= address.postalcode %>
+      <%= button_to remove_address_path(address), method: :get, class: 'btn btn-danger' do%>
+      Remove address
+      <% end %>
+      </div>
+<% end %>
+</div>
+<br/>
+<br/>
+<h3>Add New Address:</h3>
+<%= form_with url: new_address_path, method: :get do |form| %>
+  <% provinces_array = Province.all.map { |province| [province.province, province.id] } %>
+
+  First Name: <%= form.text_field :fname, :required => 'required' %><br />
+  Last Name: <%= form.text_field :lname, :required => 'required'%><br />
+  Street Address: <%= form.text_field :street, :required => 'required' %><br />
+  City: <%= form.text_field :city, :required => 'required' %>
+  <%= select_tag :province_id, options_for_select(provinces_array) %><br />
+  Postal Code: <%= form.text_field :postalcode, :required => 'required' %><br />
+
+  <% form.hidden_field :user_id, :value => current_user.id%>
+
+  <%= form.submit "Add Address" %>
+<% end %>

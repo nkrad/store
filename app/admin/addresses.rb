@@ -1,11 +1,5 @@
 ActiveAdmin.register Address do
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :fname, :lname, :street, :city, :postalcode, :province_id
+  permit_params :fname, :lname, :street, :city, :postalcode, :province_id, :user_id
   #
   # or
   #
@@ -14,5 +8,20 @@ ActiveAdmin.register Address do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
+  # exact same as demo
+  form do |f| # This is a formtastic form builder.
+    f.semantic_errors # shows errors on :base
+    # f.inputs          # builds an input field for every attribute
+    f.inputs do
+      f.input :fname
+      f.input :lname
+      f.input :street
+      f.input :city
+      f.input :postalcode
+      f.input :province_id, as: :select, collection: Province.all.map { |c| [c.province, c.id] }
+      f.input :user_id, as: :select, collection: User.all.map { |c| [c.email, c.id] }
+    end
+    f.actions         # adds the 'Submit' and 'Cancel' buttons
+  end
 end
