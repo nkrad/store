@@ -26,7 +26,11 @@ class ProfileController < ApplicationController
   end
 
   def remove
-    addressToRemove = Address.find(:id)
+    address = Address.find(params[:id])
+
+    flash[:notice] = "❌ Adress Removed"
+
+    address.destroy
 
     redirect_back(fallback_location: root_path)
   end

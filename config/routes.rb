@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get "new_address" => "profile#new"
 
+  # routes to the remove action within the profile controller
   get "remove_address" => "profile#remove"
 
   # sets the root path to the home controller
