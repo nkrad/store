@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'checkout/cart'
+  get 'checkout/receipt'
   get "profile/edit"
   devise_for :users
   get "category/index"
