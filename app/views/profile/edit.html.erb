@@ -1,4 +1,3 @@
-
 <h1>Account | <%= current_user.email  %></h1>
 
 <h3>Saved Address:</h3>
@@ -23,7 +22,12 @@
 <% end %>
 </div>
 <br/>
+
+<h3>Past Orders:</h3>
+
+
 <br/>
+
 <h3>Change Address:</h3>
 <%= form_with url: new_address_path, method: :get do |form| %>
   <% provinces_array = Province.all.map { |province| [province.province, province.id] } %>

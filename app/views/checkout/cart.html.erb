@@ -29,7 +29,7 @@
 <% end %>
 
 
-<%= form_with url: new_address_path, method: :get do |form| %>
+<%= form_with url: checkout_receipt_path, method: :get do |form| %>
   <% form.hidden_field :user_id, :value => current_user.id%>
 
   <h4>Shipping: FREE</h4>
