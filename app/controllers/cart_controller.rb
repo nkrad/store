@@ -45,6 +45,7 @@ class CartController < ApplicationController
     flash[:notice] = "➕#{product.name}'s quantity was updated."
 
     # uncomment to redirect to cart page
+    redirect_back(fallback_location: root_path)
     # redirect_to root_path
     # testing if github still auth
   end

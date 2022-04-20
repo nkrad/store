@@ -1,7 +1,11 @@
 
 <h1>Account | <%= current_user.email  %></h1>
 
-<h3>Saved Addresses:</h3>
+<h3>Saved Address:</h3>
+
+<% if @addresses.count == 0%>
+<p>No Address on record!</p>
+<%end%>
 
 <div class="row">
 <% @addresses.each do |address| %>
@@ -20,7 +24,7 @@
 </div>
 <br/>
 <br/>
-<h3>Add New Address:</h3>
+<h3>Change Address:</h3>
 <%= form_with url: new_address_path, method: :get do |form| %>
   <% provinces_array = Province.all.map { |province| [province.province, province.id] } %>
 
@@ -28,10 +32,10 @@
   Last Name: <%= form.text_field :lname, :required => 'required'%><br />
   Street Address: <%= form.text_field :street, :required => 'required' %><br />
   City: <%= form.text_field :city, :required => 'required' %>
-  <%= select_tag :province_id, options_for_select(provinces_array) %><br />
+  Province: <%= select_tag :province_id, options_for_select(provinces_array) %><br />
   Postal Code: <%= form.text_field :postalcode, :required => 'required' %><br />
 
   <% form.hidden_field :user_id, :value => current_user.id%>
 
-  <%= form.submit "Add Address" %>
+  <%= form.submit "Change Address" %>
 <% end %>

@@ -32,16 +32,23 @@
           <%= link_to product.name, product %> |
           $<%= product.price.to_f %> |
           Qty: <%= select_tag :quantity, options_for_select(1..10, session[:quantity][session[:cart].index(product.id)]), onchange: "this.form.submit();"%>
+
           <% end%>
+
           <%= button_to cart_path(product), method: :delete, class: 'btn btn-link',form: {style: 'display:inline-block;'} do%>
           Remove from cart
   <% end %>
+
         </li>
   <% end %>
-  <%= form_with url: cart_path(cart), method: :post do %>
-    <%= hidden_field_tag :id, cart %>
-    <%= button_tag 'Checkout', class: 'btn btn-success' %>
-  <% end%>
+  <h4>Subtotal: $<%= cart_subtotal %></h4>
+
+
+<% if user_signed_in? %>
+  <%= link_to "Checkout", checkout_cart_path,class: 'btn btn-success'  %>
+  <% else %>
+  <%= link_to "Login to checkout", new_user_session_path,class: 'btn btn-success' %>
+  <% end %>
     </ul>
 <% else %>
   <p>No items in your cart.</p>

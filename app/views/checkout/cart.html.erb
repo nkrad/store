@@ -1,2 +1,75 @@
-<h1>Checkout#cart</h1>
-<p>Find me in app/views/checkout/cart.html.erb</p>
+<h1>Checkout</h1>
+<% cart.each do |product| %>
+      <%= image_tag product.image, :size => '35x35' %>
+      <%= link_to product.name, product %> |
+      $<%= product.price %> |
+      Qty: <%=  session[:quantity][session[:cart].index(product.id)]  %> |
+      Item Total: $<%= product.price.to_f * session[:quantity][session[:cart].index(product.id)] %>
+<br>
+<% end %>
+
+
+
+<h2>Shipping Address</h2>
+
+
+<% if current_user_address.count == 0%>
+<p>No Address on record!<%= link_to "Add an address", profile_edit_path %></p>
+<%end%>
+
+<% current_user_address.each do |address| %>
+<div class="card" style="width: 18rem;">
+      <%= address.fname %>
+      <%= address.lname %><br/>
+      <%= address.street %><br/>
+      <%= address.city %>,
+      <%= address.province.province %><br/>
+      <%= address.postalcode %>
+      </div>
+<% end %>
+
+
+<%= form_with url: new_address_path, method: :get do |form| %>
+  <% form.hidden_field :user_id, :value => current_user.id%>
+
+  <h4>Shipping: FREE</h4>
+
+  <% tempTax = 0%>
+
+  <% current_user_address.each do |address| %>
+    <% if address.province.province = "MB"%>
+    <% tempTax = 0.12%>
+    <% elsif address.province.province = "ON"%>
+    <% tempTax = 0.13%>
+    <% elsif address.province.province = "QC"%>
+    <% tempTax = 0.14975%>
+    <% elsif address.province.province = "BC"%>
+    <% tempTax = 0.12%>
+    <% elsif address.province.province = "AB"%>
+    <% tempTax = 0.05%>
+    <% elsif address.province.province = "SK"%>
+    <% tempTax = 0.11%>
+    <% elsif address.province.province = "NL"%>
+    <% tempTax = 0.15%>
+    <% elsif address.province.province = "NS"%>
+    <% tempTax = 0.15%>
+    <% elsif address.province.province = "PE"%>
+    <% tempTax = 0.15%>
+    <% elsif address.province.province = "NB"%>
+    <% tempTax = 0.15%>
+    <% elsif address.province.province = "YT"%>
+    <% tempTax = 0.05%>
+    <% elsif address.province.province = "NT"%>
+    <% tempTax = 0.05%>
+    <% elsif address.province.province = "NU"%>
+    <% tempTax = 0.05%>
+    <%end%>
+  <% end %>
+
+  <h3>Product Total: $<%= cart_subtotal %></h3>
+  <h3>Taxes: $<%= (tempTax * cart_subtotal).round(2)%></h3>
+  <h3>Grand Total: $<%= ((tempTax * cart_subtotal)+cart_subtotal).round(2)%></h3>
+  <%= form.submit  "Place Order",class: 'btn btn-primary' %>
+
+<% end %>
+

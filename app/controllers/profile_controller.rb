@@ -8,8 +8,13 @@ class ProfileController < ApplicationController
   end
 
   def new
-    address = Address.new
+    # deletes old address attached to user IF THERE IS ONE
+    oldAddress = Address.where("user_id = ?", @user)
 
+    oldAddress.delete(oldAddress)
+
+    # creates a new address for the user
+    address = Address.new
     address.fname = params[:fname]
     address.lname = params[:lname]
     address.street = params[:street]
@@ -17,9 +22,7 @@ class ProfileController < ApplicationController
     address.province_id = params[:province_id]
     address.postalcode = params[:postalcode]
     address.user_id = current_user.id
-
-    flash[:notice] = "➕ New Address Added"
-
+    flash[:notice] = "➕ Address Updated"
     address.save
 
     redirect_back(fallback_location: root_path)
