@@ -8,7 +8,7 @@
 
 <div class="row">
 <% @addresses.each do |address| %>
-<div class="card">
+<div class="card"style="width: 18rem;">
       <%= address.fname %>
       <%= address.lname %><br/>
       <%= address.street %><br/>
@@ -24,7 +24,24 @@
 <br/>
 
 <h3>Past Orders:</h3>
-
+<% if @orders.count == 0%>
+<p>No past orders on record!</p>
+<%end%>
+<div class="row">
+<% @orders.each do |order| %>
+<div class="card"style="width: 18rem;">
+      <% order.order_details.each do |detail| %>
+      <%= image_tag Product.find(detail.product_id).image, :size => '160x160' %>
+      <%= Product.find(detail.product_id).name %><br>
+      Price: <%= Product.find(detail.product_id).price %><br>
+      Quantity: <%= detail.quantity %>
+      <% end %>
+      <br>
+      Tax: $<%= order.tax %><br>
+      Order Total: $<%= order.grand_total %>
+      </div>
+<% end %>
+</div>
 
 <br/>
 

@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
     session[:quantity] ||= []
     # keeps track of total price of all items in cart (item price x quanity)
     session[:cartSubtotal] ||= 0
+
+    # only used in checkout controller
+    session[:tax_rate] ||= 0
   end
 
   def cart

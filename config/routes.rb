@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'checkout/cart'
-  get 'checkout/receipt'
+  get "checkout/cart"
+  get "checkout/receipt"
   get "profile/edit"
   devise_for :users
   get "category/index"
@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   root to: "home#home"
 
   resources :cart
+
+  post "checkout/receipt"
+  get "checkout/receipt"
 
   get "cart/show"
   post "cart/update"

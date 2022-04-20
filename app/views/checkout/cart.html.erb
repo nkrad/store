@@ -4,12 +4,12 @@
       <%= link_to product.name, product %> |
       $<%= product.price %> |
       Qty: <%=  session[:quantity][session[:cart].index(product.id)]  %> |
-      Item Total: $<%= product.price.to_f * session[:quantity][session[:cart].index(product.id)] %>
+      Item Total: $<%= product.price.round(2) * session[:quantity][session[:cart].index(product.id)] %>
 <br>
 <% end %>
 
-
-
+<br>
+<br>
 <h2>Shipping Address</h2>
 
 
@@ -27,49 +27,102 @@
       <%= address.postalcode %>
       </div>
 <% end %>
-
+<br>
 
 <%= form_with url: checkout_receipt_path, method: :get do |form| %>
-  <% form.hidden_field :user_id, :value => current_user.id%>
-
   <h4>Shipping: FREE</h4>
 
-  <% tempTax = 0%>
+  <% tempGST = 0%>
+  <% tempPST = 0%>
+  <% tempHST = 0%>
 
   <% current_user_address.each do |address| %>
     <% if address.province.province = "MB"%>
-    <% tempTax = 0.12%>
+    <% tempPST = 0.07%>
+    <% tempGST = 0.05%>
+    <% tempHST = 0.00%>
+    <% session[:tax_rate] = 0.12%>
     <% elsif address.province.province = "ON"%>
-    <% tempTax = 0.13%>
+    <% tempPST = 0.00%>
+    <% tempHST = 0.13%>
+    <% tempGST = 0.00%>
+    <% @tax_percent = 0.13%>
     <% elsif address.province.province = "QC"%>
-    <% tempTax = 0.14975%>
+    <% tempPST = 0.09975%>
+    <% tempGST = 0.05%>
+    <% tempHST = 0.00%>
+    <% @tax_percent = 0.14979%>
     <% elsif address.province.province = "BC"%>
-    <% tempTax = 0.12%>
+    <% tempPST = 0.07%>
+    <% tempGST = 0.05%>
+    <% tempHST = 0.00%>
+    <% @tax_percent = 0.12%>
     <% elsif address.province.province = "AB"%>
-    <% tempTax = 0.05%>
+    <% tempPST = 0.00%>
+    <% tempGST = 0.05%>
+    <% tempHST = 0.00%>
+    <% @tax_percent = 0.05%>
     <% elsif address.province.province = "SK"%>
-    <% tempTax = 0.11%>
+    <% tempPST = 0.06%>
+    <% tempGST = 0.05%>
+    <% tempHST = 0.00%>
+    <% @tax_percent = 0.11%>
     <% elsif address.province.province = "NL"%>
-    <% tempTax = 0.15%>
+    <% tempPST = 0.00%>
+    <% tempGST = 0.00%>
+    <% tempHST = 0.15%>
+    <% @tax_percent = 0.15%>
     <% elsif address.province.province = "NS"%>
-    <% tempTax = 0.15%>
+    <% tempPST = 0.00%>
+    <% tempGST = 0.00%>
+    <% tempHST = 0.15%>
+    <% @tax_percent = 0.15%>
     <% elsif address.province.province = "PE"%>
-    <% tempTax = 0.15%>
+    <% tempPST = 0.00%>
+    <% tempGST = 0.00%>
+    <% tempHST = 0.15%>
+    <% @tax_percent = 0.15%>
     <% elsif address.province.province = "NB"%>
-    <% tempTax = 0.15%>
+    <% tempPST = 0.00%>
+    <% tempGST = 0.00%>
+    <% tempHST = 0.15%>
+    <% @tax_percent = 0.15%>
     <% elsif address.province.province = "YT"%>
-    <% tempTax = 0.05%>
+    <% tempPST = 0.00%>
+    <% tempGST = 0.05%>
+    <% tempHST = 0.00%>
+    <% @tax_percent = 0.05%>
     <% elsif address.province.province = "NT"%>
-    <% tempTax = 0.05%>
+    <% tempPST = 0.00%>
+    <% tempGST = 0.05%>
+    <% tempHST = 0.00%>
+    <% @tax_percent = 0.05%>
     <% elsif address.province.province = "NU"%>
-    <% tempTax = 0.05%>
+    <% tempPST = 0.00%>
+    <% tempGST = 0.05%>
+    <% tempHST = 0.00%>
+    <% @tax_percent = 0.05%>
     <%end%>
   <% end %>
 
   <h3>Product Total: $<%= cart_subtotal %></h3>
-  <h3>Taxes: $<%= (tempTax * cart_subtotal).round(2)%></h3>
-  <h3>Grand Total: $<%= ((tempTax * cart_subtotal)+cart_subtotal).round(2)%></h3>
-  <%= form.submit  "Place Order",class: 'btn btn-primary' %>
+  <h3>GST: $<%= (tempGST * cart_subtotal).round(2)%> | PST: $<%= (tempPST * cart_subtotal).round(2)%> | HST: $<%= (tempHST * cart_subtotal).round(2)%></h3>
+  <h3>Total Tax: $<%= ((tempHST + tempGST + tempPST )* cart_subtotal).round(2)%></h3>
+
+  <h3>Grand Total: $<%= (cart_subtotal + ((tempHST + tempGST + tempPST )* cart_subtotal)).round(2)%></h3>
+
+  <% @tax_total = ((tempHST + tempGST + tempPST )* cart_subtotal).round(2)%>
+  <% @grand_total = (cart_subtotal + ((tempHST + tempGST + tempPST )* cart_subtotal)).round(2)%>
+
+  <% form.hidden_field :tax_rate, :value => @tax_percent%>
+  <% form.hidden_field :user_id, :value => current_user.id%>
+  <% form.hidden_field :sub_total, :value => cart_subtotal%>
+  <% form.hidden_field :tax_total, :value => @tax_total%>
+  <% form.hidden_field :grand_total, :value => @grand_total%>
+
+
+  <br>
+  <%= form.submit "Place Order",class: 'btn btn-primary' %>
 
 <% end %>
 
