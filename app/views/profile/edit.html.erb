@@ -45,7 +45,7 @@
 
 <br/>
 
-<h3>Change Address:</h3>
+<h3>Add/Change Address:</h3>
 <%= form_with url: new_address_path, method: :get do |form| %>
   <% provinces_array = Province.all.map { |province| [province.province, province.id] } %>
 
