@@ -14,6 +14,7 @@ class CheckoutController < ApplicationController
     order.subtotal = cart_subtotal
     order.tax = (session[:tax_rate] * cart_subtotal).round(2)
     order.grand_total = (cart_subtotal + (session[:tax_rate].round(2) * cart_subtotal)).round(2)
+    order.address_id = Address.where("user_id = ?", current_user.id).first.id
     order.save
 
     # create new order_details for each product in cart
