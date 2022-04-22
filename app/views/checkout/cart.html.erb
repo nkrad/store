@@ -122,7 +122,17 @@
 
 
   <br>
-  <%= form.submit "Place Order",class: 'btn btn-primary' %>
+
+
+<% if current_user_address.count > 0%>
+<%= form.submit "Place Order",class: 'btn btn-primary' %>
+<%end%>
+
+
 
 <% end %>
+
+<% if current_user_address.count == 0%>
+<p><%= button_to "Add an address", profile_edit_path,class: 'btn btn-danger', method: :get %></p>
+<%end%>
 
