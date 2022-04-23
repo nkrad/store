@@ -38,16 +38,9 @@ class CartController < ApplicationController
 
     product = Product.find(id)
 
-    # changes the quantity AT the index of the product id
     session[:quantity][session[:cart].index(id)] = quantity
-
-    # notice does not appear due to page not redirecting
     flash[:notice] = "➕#{product.name}'s quantity was updated."
-
-    # uncomment to redirect to cart page
     redirect_back(fallback_location: root_path)
-    # redirect_to root_path
-    # testing if github still auth
   end
 
   def show

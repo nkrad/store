@@ -32,7 +32,6 @@
           <%= link_to product.name, product %> |
           $<%= product.price.to_f %> |
           Qty: <%= select_tag :quantity, options_for_select(1..10, session[:quantity][session[:cart].index(product.id)]), onchange: "this.form.submit();"%>
-
           <% end%>
 
           <%= button_to cart_path(product), method: :delete, class: 'btn btn-link',form: {style: 'display:inline-block;'} do%>

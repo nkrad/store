@@ -48,7 +48,6 @@
 <h3>Add/Change Address:</h3>
 <%= form_with url: new_address_path, method: :get do |form| %>
   <% provinces_array = Province.all.map { |province| [province.province, province.id] } %>
-
   First Name: <%= form.text_field :fname, :required => 'required' %><br />
   Last Name: <%= form.text_field :lname, :required => 'required'%><br />
   Street Address: <%= form.text_field :street, :required => 'required' %><br />
